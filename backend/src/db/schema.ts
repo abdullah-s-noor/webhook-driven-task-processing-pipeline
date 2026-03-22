@@ -11,6 +11,7 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
+import type { JsonValue } from "../types/pipeline.js";
 
 export const jobStatusEnum = pgEnum("job_status", [
   "pending",
@@ -67,7 +68,7 @@ export const pipelineSteps = pgTable(
       .notNull()
       .references(() => pipelines.id, { onDelete: "cascade" }),
     type: varchar("type", { length: 100 }).notNull(),
-    config: jsonb("config").$type<Record<string, unknown>>().notNull(),
+    config: jsonb("config").$type<JsonValue>().notNull(),
     order: integer("order").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .defaultNow()
@@ -102,11 +103,9 @@ export const jobs = pgTable(
     pipelineId: uuid("pipeline_id")
       .notNull()
       .references(() => pipelines.id, { onDelete: "cascade" }),
-    payload: jsonb("payload").$type<Record<string, unknown>>().notNull(),
-    stepsSnapshot: jsonb("steps_snapshot")
-      .$type<Record<string, unknown>>()
-      .notNull(),
-    processedPayload: jsonb("processed_payload").$type<Record<string, unknown>>(),
+    payload: jsonb("payload").$type<JsonValue>().notNull(),
+    stepsSnapshot: jsonb("steps_snapshot").$type<JsonValue>().notNull(),
+    processedPayload: jsonb("processed_payload").$type<JsonValue>(),
     status: jobStatusEnum("status").default("pending").notNull(),
     filterReason: text("filter_reason"),
     attemptCount: integer("attempt_count").default(0).notNull(),

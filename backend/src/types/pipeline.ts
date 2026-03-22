@@ -29,3 +29,10 @@ export interface PipelineStep {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface Subscriber {
+  id: string;
+  pipelineId: string;
+  url: string;
+  createdAt: Date;
+}
