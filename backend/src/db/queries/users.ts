@@ -4,7 +4,7 @@ import { db } from "../client.js";
 import { users } from "../schema.js";
 import type { User } from "../../types/user.js";
 
-const PASSWORD_SALT_ROUNDS = 10;
+const PASSWORD_SALT_ROUNDS = 12;
 
 interface CreateUserInput {
   email: string;

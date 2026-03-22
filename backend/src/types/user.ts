@@ -4,3 +4,8 @@ export interface User {
   passwordHash: string;
   createdAt: Date;
 }
+
+export interface AuthenticatedUser {
+  id: string;
+  email: string;
+}
