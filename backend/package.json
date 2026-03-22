@@ -5,24 +5,41 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc",
+    "dev": "tsx src/api/index.ts",
+    "build": "tsc",
     "start": "node dist/api/index.js",
-    "dev": "npx tsc && node dist/api/index.js",
-    "worker": "node dist/worker/index.js"
+    "worker": "tsx src/worker/index.ts",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.0",
     "@types/pg": "^8.20.0",
+    "@types/supertest": "^7.2.0",
+    "@types/uuid": "^10.0.0",
+    "jest": "^29.7.0",
+    "jest-util": "^29.7.0",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.6",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "dotenv": "^17.2.3",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "pg": "^8.16.3"
+    "express-rate-limit": "^8.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.20.0",
+    "pino": "^10.3.1",
+    "uuid": "^13.0.0",
+    "zod": "^4.3.6"
   }
 }

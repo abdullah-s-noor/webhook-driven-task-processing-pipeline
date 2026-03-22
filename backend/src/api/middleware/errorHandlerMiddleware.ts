@@ -1,4 +1,4 @@
-import { ErrorMiddleware } from "./types";
+import { ErrorMiddleware } from "./types.js";
 import { NotFoundError } from "../errors/notFoundError.js";
 import { BadRequestError } from "../errors/badRequestError.js";
 import { UnauthorizedError } from "../errors/unauthorizedError.js";

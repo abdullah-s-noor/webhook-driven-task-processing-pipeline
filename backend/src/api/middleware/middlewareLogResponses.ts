@@ -1,4 +1,4 @@
-import { Middleware } from "./types";
+import { Middleware } from "./types.js";
 export const middlewareLogResponses: Middleware = (req, res, next) => {
     res.on("finish", () => {
         const statusCode = res.statusCode;
