@@ -12,5 +12,5 @@ app.use("/test", testRouter);
 app.use(errorHandlerMiddleware);
 
 app.listen(config.port, () => {
-  console.log(`API server is running on http://localhost:${config.port}`);
+    console.log(`API server is running on http://localhost:${config.port}`);
 });
