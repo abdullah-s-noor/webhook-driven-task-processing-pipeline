@@ -1,6 +1,6 @@
 import { asc, eq } from "drizzle-orm";
 import { db } from "../client.js";
-import { jobs, pipelines, pipelineSteps } from "../schema.js";
+import { jobs, pipelineSteps } from "../schema.js";
 import type { Job, JobStatus } from "../../types/job.js";
 import type { JsonValue } from "../../types/pipeline.js";
 
@@ -89,15 +89,4 @@ export async function updateStatus(
     .returning();
 
   return record ? toJob(record) : null;
-}
-
-export async function findByPipelineUsername(username: string): Promise<Job[]> {
-  const records = await db
-    .select({ job: jobs })
-    .from(jobs)
-    .innerJoin(pipelines, eq(jobs.pipelineId, pipelines.id))
-    .where(eq(pipelines.username, username))
-    .orderBy(asc(jobs.createdAt));
-
-  return records.map((record) => toJob(record.job));
 }

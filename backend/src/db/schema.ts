@@ -43,7 +43,6 @@ export const pipelines = pgTable(
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     name: varchar("name", { length: 255 }).notNull(),
-    username: varchar("username", { length: 255 }).notNull(),
     sourceUrl: text("source_url").notNull(),
     signingSecret: text("signing_secret").notNull(),
     isActive: boolean("is_active").default(true).notNull(),
@@ -55,7 +54,6 @@ export const pipelines = pgTable(
       .notNull(),
   },
   (table) => ({
-    usernameUnique: unique("pipelines_username_unique").on(table.username),
     sourceUrlUnique: unique("pipelines_source_url_unique").on(table.sourceUrl),
   })
 );
