@@ -1,4 +1,4 @@
-import jwt, { TokenExpiredError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { config } from "../../config.js";
 import { UnauthorizedError } from "../errors/unauthorizedError.js";
 import type { Middleware } from "./types.js";
@@ -30,7 +30,7 @@ export const authenticate: Middleware = (req, _res, next) => {
     };
     next();
   } catch (error) {
-    if (error instanceof TokenExpiredError) {
+    if (error instanceof Error && error.name === "TokenExpiredError") {
       return next(new UnauthorizedError("Token expired"));
     }
 

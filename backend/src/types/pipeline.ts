@@ -23,7 +23,6 @@ export interface Pipeline {
   id: string;
   userId: string;
   name: string;
-  username: string;
   sourceUrl: string;
   signingSecret: string;
   isActive: boolean;
