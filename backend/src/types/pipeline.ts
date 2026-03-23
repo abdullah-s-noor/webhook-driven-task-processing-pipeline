@@ -1,4 +1,13 @@
-export type StepType = "filter" | "transform" | "delay" | "deliver";
+export type StepType =
+  | "require_fields"
+  | "filter"
+  | "transform"
+  | "set_fields"
+  | "enrich"
+  | "calculate_field"
+  | "pick_fields"
+  | "delay"
+  | "deliver";
 
 export type JsonValue =
   | string
@@ -7,6 +16,8 @@ export type JsonValue =
   | null
   | { [key: string]: JsonValue }
   | JsonValue[];
+
+export type PayloadObject = { [key: string]: JsonValue };
 
 export interface Pipeline {
   id: string;
