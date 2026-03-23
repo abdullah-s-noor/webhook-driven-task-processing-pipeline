@@ -5,6 +5,7 @@ import { errorHandlerMiddleware } from "./middleware/errorHandlerMiddleware.js";
 import authRouter from "./routes/auth.js";
 import pipelinesRouter from "./routes/pipelines.js";
 import pipelineStepsRouter from "./routes/pipeline-steps.js";
+import subscribersRouter from "./routes/subscribers.js";
 import testRouter from "./routes/test.js";
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/pipelines", pipelinesRouter);
 app.use("/pipeline-steps", pipelineStepsRouter);
+app.use("/subscribers", subscribersRouter);
 app.use("/test", testRouter);
 
 app.use(errorHandlerMiddleware);
