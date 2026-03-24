@@ -1,4 +1,3 @@
-import { config } from "../../config.js";
 import { create as createDeliveries } from "../../db/queries/deliveries.js";
 import { updateStatus as updateJobStatus } from "../../db/queries/jobs.js";
 import { executeStep } from "../../steps/index.js";
@@ -49,14 +48,11 @@ function toSortedSteps(stepsSnapshot: JsonValue): JobStepSnapshot[] {
   return parsedSteps.sort((a, b) => a.order - b.order);
 }
 
-async function failOrRequeue(job: Job, errorMessage: string): Promise<void> {
-  const nextAttempt = job.attemptCount + 1;
-  const shouldFail = nextAttempt >= config.maxDeliveryAttempts;
-
+async function failJob(job: Job, errorMessage: string): Promise<void> {
   await updateJobStatus(job.id, {
-    status: shouldFail ? "failed" : "pending",
-    attemptCount: nextAttempt,
+    status: "failed",
     filterReason: errorMessage,
+    processedAt: new Date(),
   });
 }
 
@@ -98,6 +94,6 @@ export async function processJob(job: Job): Promise<void> {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unknown processing error";
-    await failOrRequeue(job, message);
+    await failJob(job, message);
   }
 }

@@ -89,6 +89,7 @@
   padding: 26px;
   display: grid;
   gap: 14px;
+  align-content: start;
 }
 
 .content-head {
@@ -116,6 +117,1046 @@
   cursor: pointer;
   color: #e2e8f0;
   background: rgba(15, 23, 42, 0.6);
+}
+
+.new-pipeline-main-btn {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 20px;
+  font-weight: 700;
+  color: #f8faff;
+  background: linear-gradient(135deg, #7a6af7, #6454ea);
+  box-shadow: 0 18px 28px rgba(99, 102, 241, 0.25);
+  cursor: pointer;
+}
+
+.new-pipeline-main-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.pipeline-empty-state {
+  border-radius: 18px;
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  background: rgba(9, 14, 25, 0.72);
+  padding: 28px;
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.pipeline-empty-state h3,
+.pipeline-empty-state p {
+  margin: 0;
+}
+
+.pipeline-empty-state p {
+  color: #94a3b8;
+}
+
+.pipeline-card-list {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.pipeline-showcase-card {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  background: linear-gradient(180deg, rgba(10, 16, 28, 0.96), rgba(8, 13, 24, 0.95));
+  padding: 14px 18px;
+  color: #f8fafc;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  min-height: 0;
+  height: auto;
+}
+
+.pipeline-showcase-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(129, 140, 248, 0.62);
+  box-shadow: 0 16px 26px rgba(2, 6, 23, 0.45);
+}
+
+.pipeline-showcase-main {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.pipeline-showcase-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pipeline-showcase-title-row h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.pipeline-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #aeb9c9;
+  background: rgba(148, 163, 184, 0.12);
+  font-size: 11px;
+  text-transform: lowercase;
+}
+
+.pipeline-status-badge.active {
+  border-color: rgba(16, 185, 129, 0.55);
+  color: #5eead4;
+  background: rgba(16, 185, 129, 0.16);
+}
+
+.pipeline-step-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.step-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+.step-chip.step-filter {
+  color: #60a5fa;
+  background: rgba(30, 64, 175, 0.28);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.step-chip.step-transform {
+  color: #34d399;
+  background: rgba(5, 150, 105, 0.23);
+  border-color: rgba(16, 185, 129, 0.38);
+}
+
+.step-chip.step-enrich {
+  color: #fbbf24;
+  background: rgba(146, 64, 14, 0.24);
+  border-color: rgba(245, 158, 11, 0.42);
+}
+
+.step-chip.step-require_fields {
+  color: #f472b6;
+  background: rgba(131, 24, 67, 0.28);
+  border-color: rgba(236, 72, 153, 0.4);
+}
+
+.step-chip.step-calculate_field {
+  color: #a78bfa;
+  background: rgba(79, 70, 229, 0.26);
+  border-color: rgba(129, 140, 248, 0.42);
+}
+
+.step-chip.step-set_fields {
+  color: #22c55e;
+  background: rgba(20, 83, 45, 0.34);
+  border-color: rgba(34, 197, 94, 0.42);
+}
+
+.step-chip.step-pick_fields {
+  color: #fb923c;
+  background: rgba(154, 52, 18, 0.34);
+  border-color: rgba(251, 146, 60, 0.42);
+}
+
+.step-chip.step-delay,
+.step-chip.step-deliver {
+  color: #e2e8f0;
+  background: rgba(71, 85, 105, 0.25);
+}
+
+.pipeline-step-empty {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.pipeline-source-pill {
+  display: inline-flex;
+  max-width: 100%;
+  border-radius: 9px;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  background: rgba(15, 23, 42, 0.72);
+  color: #94a3b8;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+  font-size: 12px;
+  padding: 6px 9px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pipeline-showcase-side {
+  min-width: 134px;
+  display: grid;
+  gap: 6px;
+  text-align: right;
+  font-size: 12px;
+  color: #a8b4c5;
+}
+
+.pipeline-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.72);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 40;
+  backdrop-filter: blur(3px);
+}
+
+.pipeline-modal {
+  width: min(920px, 100%);
+  max-height: min(90vh, 920px);
+  overflow-y: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(71, 85, 105, 0.55);
+  background: #060d1a;
+  box-shadow: 0 24px 40px rgba(2, 6, 23, 0.55);
+  color: #f8fafc;
+}
+
+.pipeline-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 22px 24px 16px;
+  border-bottom: 1px solid rgba(71, 85, 105, 0.45);
+}
+
+.pipeline-modal-header h3 {
+  margin: 0;
+  font-size: 35px;
+  letter-spacing: -0.5px;
+}
+
+.pipeline-modal-header button {
+  border: 0;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.pipeline-modal-body {
+  padding: 18px 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.dialog-field-label {
+  font-size: 14px;
+  color: #a9b7c8;
+}
+
+.dialog-input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(71, 85, 105, 0.65);
+  background: rgba(15, 23, 42, 0.7);
+  color: #e2e8f0;
+  padding: 11px 13px;
+}
+
+.dialog-steps-head,
+.dialog-subscriber-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialog-subscriber-head button {
+  border: 0;
+  background: transparent;
+  color: #8b7dff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.step-picker-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.step-chip.picker {
+  cursor: pointer;
+}
+
+.picked-steps-box {
+  min-height: 74px;
+  border-radius: 12px;
+  border: 1px dashed rgba(71, 85, 105, 0.7);
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.picked-steps-box p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.step-chip.removable,
+.subscriber-pill {
+  cursor: pointer;
+}
+
+.subscriber-pill-list {
+  display: grid;
+  gap: 8px;
+}
+
+.subscriber-pill {
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.68);
+  color: #cbd5e1;
+  text-align: left;
+  padding: 9px 10px;
+}
+
+.pipeline-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid rgba(71, 85, 105, 0.45);
+  padding: 16px 24px 20px;
+}
+
+.modal-primary,
+.modal-secondary,
+.modal-danger {
+  border-radius: 12px;
+  padding: 10px 16px;
+  border: 1px solid rgba(100, 116, 139, 0.55);
+  cursor: pointer;
+  color: #f1f5f9;
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.modal-primary {
+  background: linear-gradient(135deg, #7a6af7, #6454ea);
+  border: 0;
+}
+
+.modal-danger {
+  color: #fda4af;
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(127, 29, 29, 0.18);
+}
+
+.detail-top-actions {
+  display: flex;
+  gap: 10px;
+  padding: 16px 24px 0;
+  flex-wrap: wrap;
+}
+
+.dialog-field-stack {
+  padding: 14px 24px 0;
+  display: grid;
+  gap: 8px;
+}
+
+.input-action-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.detail-section {
+  padding: 16px 24px 6px;
+  display: grid;
+  gap: 10px;
+}
+
+.detail-section h4 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.detail-list-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.detail-step-card {
+  border-radius: 12px;
+  border: 1px solid rgba(71, 85, 105, 0.55);
+  background: rgba(15, 23, 42, 0.7);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.detail-step-card p {
+  margin: 0;
+  color: #c5d3e4;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+}
+
+.detail-step-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-order {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(51, 65, 85, 0.6);
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+.detail-subscriber-item {
+  border-radius: 10px;
+  border: 1px solid rgba(71, 85, 105, 0.55);
+  background: rgba(15, 23, 42, 0.7);
+  padding: 10px;
+  color: #cbd5e1;
+  word-break: break-word;
+}
+
+.detail-divider {
+  height: 1px;
+  margin: 12px 24px 0;
+  background: rgba(71, 85, 105, 0.45);
+}
+
+.test-webhook-section {
+  padding-top: 14px;
+  padding-bottom: 18px;
+}
+
+.test-webhook-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.test-webhook-head h4 {
+  margin: 0;
+}
+
+.test-webhook-random {
+  border: 0;
+  background: transparent;
+  color: #8b7dff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.test-webhook-textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  background: rgba(15, 23, 42, 0.72);
+  color: #e2e8f0;
+  padding: 12px;
+  resize: vertical;
+  min-height: 150px;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+}
+
+.edit-steps-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.edit-step-card {
+  border-radius: 12px;
+  border: 1px solid rgba(71, 85, 105, 0.55);
+  background: rgba(15, 23, 42, 0.7);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.edit-step-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-step-type-select {
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 999px;
+  background: rgba(30, 41, 59, 0.66);
+  color: #dce7f7;
+  padding: 5px 10px;
+  text-transform: lowercase;
+}
+
+.edit-step-remove {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: #9fb1c8;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.edit-step-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.edit-step-grid.filter,
+.edit-step-grid.calc {
+  grid-template-columns: 1.3fr 0.8fr 1.3fr;
+}
+
+.edit-step-grid.pair {
+  grid-template-columns: 1fr 1fr;
+}
+
+.edit-subscriber-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.edit-subscriber-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.edit-field-error {
+  margin: 4px 2px 0;
+  font-size: 12px;
+  color: #fda4af;
+}
+
+.jobs-shell {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.jobs-toolbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.jobs-toolbar-select {
+  min-width: 260px;
+  display: grid;
+  gap: 6px;
+}
+
+.jobs-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.jobs-stat-card {
+  border-radius: 14px;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  background: rgba(15, 23, 42, 0.7);
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.jobs-stat-card strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.jobs-stat-card span {
+  color: #94a3b8;
+}
+
+.jobs-stat-card.succeeded strong {
+  color: #34d399;
+}
+
+.jobs-stat-card.failed strong {
+  color: #fb7185;
+}
+
+.jobs-stat-card.queued strong {
+  color: #60a5fa;
+}
+
+.jobs-stat-card.pending strong {
+  color: #60a5fa;
+}
+
+.jobs-stat-card.processing strong {
+  color: #fbbf24;
+}
+
+.jobs-filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jobs-empty-state {
+  border-radius: 16px;
+  border: 1px dashed rgba(100, 116, 139, 0.5);
+  background: rgba(10, 16, 28, 0.7);
+  padding: 28px;
+  display: grid;
+  gap: 8px;
+}
+
+.jobs-empty-state h3 {
+  margin: 0;
+}
+
+.jobs-empty-state p {
+  margin: 0;
+  color: #94a3b8;
+  max-width: 520px;
+}
+
+.jobs-filter-chip {
+  border: 1px solid rgba(71, 85, 105, 0.55);
+  border-radius: 999px;
+  background: transparent;
+  color: #a5b1c4;
+  padding: 8px 14px;
+  cursor: pointer;
+  text-transform: lowercase;
+}
+
+.jobs-filter-chip.active {
+  background: rgba(122, 106, 247, 0.24);
+  color: #f3f0ff;
+  border-color: rgba(129, 140, 248, 0.75);
+}
+
+.jobs-table-wrap {
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  border-radius: 16px;
+  overflow: auto;
+  background: rgba(10, 16, 28, 0.86);
+}
+
+.jobs-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.jobs-table th,
+.jobs-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.45);
+}
+
+.jobs-table th {
+  color: #8f9cb1;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.jobs-table td {
+  color: #d9e3f1;
+  font-size: 14px;
+}
+
+.jobs-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.jobs-row-clickable {
+  cursor: pointer;
+}
+
+.jobs-row-clickable:hover td {
+  background: rgba(30, 41, 59, 0.34);
+}
+
+.jobs-job-id {
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+}
+
+.jobs-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(71, 85, 105, 0.55);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.jobs-status-badge.succeeded {
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.jobs-status-badge.failed {
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.2);
+  border-color: rgba(244, 63, 94, 0.45);
+}
+
+.jobs-status-badge.queued {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.jobs-status-badge.pending {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.jobs-status-badge.processing {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
+.jobs-empty-row {
+  color: #94a3b8;
+}
+
+.job-details-body {
+  display: grid;
+  gap: 12px;
+  padding: 16px 24px 24px;
+}
+
+.job-details-section {
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.64);
+  padding: 12px;
+}
+
+.job-details-section h4 {
+  margin: 0;
+}
+
+.job-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.job-overview-grid span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.job-overview-grid strong {
+  display: block;
+  margin-top: 3px;
+}
+
+.jobs-status-inline.ok {
+  color: #34d399;
+}
+
+.jobs-status-inline.failed {
+  color: #fb7185;
+}
+
+.job-failure-type {
+  margin: 0;
+  color: #fb7185;
+  font-weight: 700;
+}
+
+.job-failure-reason {
+  margin: 0;
+  color: #fecdd3;
+}
+
+.job-failed-step {
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgba(251, 113, 133, 0.35);
+  background: rgba(127, 29, 29, 0.14);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.job-failed-step span {
+  color: #fda4af;
+  font-size: 12px;
+}
+
+.job-failed-step strong {
+  color: #ffe4e6;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+  overflow-wrap: anywhere;
+}
+
+.job-json-view {
+  margin: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  background: rgba(2, 6, 23, 0.6);
+  padding: 10px;
+  color: #dce7f7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+}
+
+.job-delivery-list {
+  display: grid;
+  gap: 8px;
+}
+
+.job-deliveries-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.job-deliveries-refresh {
+  border: 1px solid rgba(129, 140, 248, 0.45);
+  border-radius: 9px;
+  background: rgba(99, 102, 241, 0.2);
+  color: #e0e7ff;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.job-deliveries-refresh:hover {
+  border-color: rgba(129, 140, 248, 0.72);
+  background: rgba(99, 102, 241, 0.3);
+}
+
+.job-delivery-card {
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.62);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.job-delivery-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.job-delivery-status {
+  text-transform: lowercase;
+  font-weight: 700;
+}
+
+.job-delivery-status.success {
+  color: #34d399;
+}
+
+.job-delivery-status.failed {
+  color: #fb7185;
+}
+
+.job-delivery-status.pending {
+  color: #60a5fa;
+}
+
+.job-delivery-attempts {
+  display: grid;
+  gap: 6px;
+}
+
+.job-delivery-url {
+  color: #93c5fd;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.job-attempt-row {
+  display: grid;
+  grid-template-columns: 90px 120px 1fr;
+  gap: 8px;
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+.job-attempt-pending {
+  color: #93c5fd;
+  font-size: 12px;
+}
+
+.metrics-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metrics-overall-card {
+  border-radius: 16px;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  background: rgba(10, 16, 28, 0.86);
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.metrics-overall-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.metrics-overall-head h3 {
+  margin: 0;
+}
+
+.metrics-overall-head strong {
+  font-size: 38px;
+  color: #f87171;
+}
+
+.metrics-progress-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(30, 41, 59, 0.75);
+  overflow: hidden;
+}
+
+.metrics-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #34d399, #60a5fa);
+  transition: width 0.25s ease;
+}
+
+.metrics-legend-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: #c7d2fe;
+  font-size: 13px;
+}
+
+.metrics-pipeline-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.metrics-pipeline-stack h3 {
+  margin: 0;
+}
+
+.metrics-pipeline-card {
+  border-radius: 14px;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  background: rgba(10, 16, 28, 0.86);
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.metrics-pipeline-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.metrics-pipeline-head h4 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.metrics-pipeline-head p {
+  margin: 4px 0 0;
+  color: #94a3b8;
+}
+
+.metrics-pipeline-head strong {
+  color: #fbbf24;
+  font-size: 36px;
+}
+
+.metrics-pipeline-bars {
+  display: flex;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(30, 41, 59, 0.65);
+  height: 7px;
+}
+
+.metrics-bar-succeeded {
+  background: #34d399;
+}
+
+.metrics-bar-failed {
+  background: #fb7185;
+}
+
+.metrics-bar-queued {
+  background: #60a5fa;
+}
+
+.metrics-bar-processing {
+  background: #fbbf24;
+}
+
+.metrics-pipeline-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: #a9b6c8;
+  font-size: 13px;
 }
 
 .overview-grid {
@@ -369,5 +1410,51 @@
 
   .content-head {
     align-items: center;
+  }
+
+  .content-head h1 {
+    font-size: 24px;
+  }
+
+  .pipeline-showcase-card {
+    flex-direction: column;
+  }
+
+  .pipeline-showcase-side {
+    min-width: 0;
+    text-align: left;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 14px;
+  }
+
+  .pipeline-modal {
+    max-height: 95vh;
+  }
+
+  .input-action-row {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-top-actions {
+    flex-direction: column;
+  }
+
+  .edit-step-grid.filter,
+  .edit-step-grid.calc,
+  .edit-step-grid.pair {
+    grid-template-columns: 1fr;
+  }
+
+  .jobs-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .job-overview-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .job-attempt-row {
+    grid-template-columns: 1fr;
   }
 }

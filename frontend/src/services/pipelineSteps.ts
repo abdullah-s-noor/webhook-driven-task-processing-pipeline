@@ -76,3 +76,22 @@ export async function deletePipelineStep(token: string, stepId: string): Promise
   const data = await parseJson<{ step: PipelineStep }>(response);
   return data.step;
 }
+
+export async function updatePipelineStep(
+  token: string,
+  stepId: string,
+  payload: {
+    type?: StepType;
+    config?: unknown;
+    order?: number;
+  }
+): Promise<PipelineStep> {
+  const response = await fetch(`${API_BASE_URL}/pipeline-steps/${stepId}`, {
+    method: "PUT",
+    headers: buildAuthHeaders(token),
+    body: JSON.stringify(payload),
+  });
+
+  const data = await parseJson<{ step: PipelineStep }>(response);
+  return data.step;
+}
