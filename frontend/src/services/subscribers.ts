@@ -58,3 +58,18 @@ export async function deleteSubscriber(token: string, id: string): Promise<Subsc
   const data = await parseJson<{ subscriber: Subscriber }>(response);
   return data.subscriber;
 }
+
+export async function updateSubscriber(
+  token: string,
+  id: string,
+  payload: { url: string }
+): Promise<Subscriber> {
+  const response = await fetch(`${API_BASE_URL}/subscribers/${id}`, {
+    method: "PUT",
+    headers: buildAuthHeaders(token),
+    body: JSON.stringify(payload),
+  });
+
+  const data = await parseJson<{ subscriber: Subscriber }>(response);
+  return data.subscriber;
+}
