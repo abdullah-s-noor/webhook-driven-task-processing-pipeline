@@ -8,7 +8,26 @@ Webhook processing platform (Frontend + Backend + Worker + PostgreSQL) for manag
 - Deliveries
 - Metrics
 
-## 1) Overview
+## Table of Contents
+
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Folder Structure](#folder-structure)
+- [Features](#features)
+- [Job and Delivery Status](#job-and-delivery-status)
+- [Prerequisites](#prerequisites)
+- [Running the App](#running-the-app)
+- [Database and Migrations](#database-and-migrations)
+- [API Documentation](#api-documentation)
+- [Quick cURL Examples](#quick-curl-examples)
+- [Step Types](#step-types)
+- [Scripts](#scripts)
+- [Operational Notes](#operational-notes)
+- [Troubleshooting](#troubleshooting)
+- [Database Diagram (ERD)](#database-diagram-erd)
+
+## Overview
 
 This repository is a monorepo with:
 - `backend/`: REST API, database access, and worker logic.
@@ -24,7 +43,13 @@ Main flow:
 6. On success, deliveries are created for subscribers.
 7. Delivery worker sends webhooks with retries.
 
-## 2) Architecture
+## Tech Stack
+
+- Backend: Express 5, TypeScript, Drizzle ORM, PostgreSQL, JWT
+- Frontend: React 19, TypeScript, Vite
+- Infra: Docker, Docker Compose
+
+## Architecture
 
 ### Backend
 - Express 5
@@ -46,7 +71,17 @@ Important folders:
   - `Metrics`
 - Job details are rendered in `JobDetailsDialog`
 
-## 3) Current Features
+## Folder Structure
+
+- `backend/src/api`: routes, handlers, middleware
+- `backend/src/db`: schema, queries, migrations
+- `backend/src/worker`: pollers and processors
+- `backend/src/steps`: step executors
+- `frontend/src/pages`: app pages
+- `frontend/src/components`: reusable UI components
+- `frontend/src/services`: API clients
+
+## Features
 
 - Pipeline CRUD.
 - Pipeline step CRUD (including edit mode inside pipeline details).
@@ -59,7 +94,7 @@ Important folders:
 - UI status simplification: `queued + processing` displayed as `pending`.
 - Deliveries sidebar section removed from Pipeline page.
 
-## 4) Job and Delivery Status Model
+## Job and Delivery Status
 
 ### Job status in database
 - `pending`
@@ -83,7 +118,13 @@ Important folders:
 - Attempt 3: after 20s
 - Then marked `failed`
 
-## 5) Running the Project
+## Prerequisites
+
+- Node.js 22+
+- PostgreSQL 16+
+- Docker (optional, recommended for fastest setup)
+
+## Running the App
 
 ### Fastest Option: Docker Compose
 
@@ -101,10 +142,6 @@ Services:
 ---
 
 ### Local Development (without Docker)
-
-Requirements:
-- Node.js 22+
-- PostgreSQL 16+
 
 ### 1) Backend
 
@@ -151,7 +188,7 @@ npm run dev
 
 Frontend service clients currently target `http://localhost:3000`.
 
-## 6) Database and Migrations
+## Database and Migrations
 
 From `backend`:
 
@@ -163,7 +200,7 @@ npm run migrate
 Migrations live in:
 - `backend/src/db/migrations`
 
-## 7) API Summary
+## API Documentation
 
 All endpoints below (except `/auth/*` and `/test`) require:
 - `Authorization: Bearer <token>`
@@ -205,7 +242,7 @@ All endpoints below (except `/auth/*` and `/test`) require:
 ### Health/Test
 - `GET /test`
 
-## 8) Quick cURL Examples
+## Quick cURL Examples
 
 ### Register
 ```bash
@@ -261,7 +298,7 @@ curl -X POST http://localhost:3000/jobs \
   }'
 ```
 
-## 9) Step Types
+## Step Types
 
 Accepted step types on the API:
 - `require_fields`
@@ -279,7 +316,7 @@ Important note:
   `require_fields`, `filter`, `transform`, `set_fields`, `enrich`, `calculate_field`, `pick_fields`.
 - `delay` and `deliver` are valid in API type validation but are not registered in runtime `stepRegistry`.
 
-## 10) Scripts
+## Scripts
 
 ### Backend (`backend/package.json`)
 - `npm run dev` - run API with tsx
@@ -296,7 +333,7 @@ Important note:
 - `npm run lint`
 - `npm run preview`
 
-## 11) Operational Notes
+## Operational Notes
 
 - Worker must be running; otherwise jobs/deliveries remain pending.
 - Pipeline delete is soft delete (`isActive=false`).
@@ -305,7 +342,7 @@ Important note:
   - Deliveries are no longer a standalone sidebar page.
   - Delivery details are shown inside Job Details dialog.
 
-## 12) Troubleshooting
+## Troubleshooting
 
 - UI cannot reach API:
   - Ensure backend is running on port `3000`.
@@ -319,26 +356,26 @@ Important note:
   - Ensure subscriber URL is valid and reachable.
   - Inspect `delivery_attempts` errors.
 
-## 13) Database Diagram (ERD)
+## Database Diagram (ERD)
 
 ```mermaid
 erDiagram
     USERS {
       uuid id PK
-      varchar email UNIQUE
+      varchar email UK
       text password_hash
-      timestamptz created_at
+      timestamp created_at
     }
 
     PIPELINES {
       uuid id PK
       uuid user_id FK
       varchar name
-      text source_url UNIQUE
+      text source_url UK
       text signing_secret
       boolean is_active
-      timestamptz created_at
-      timestamptz updated_at
+      timestamp created_at
+      timestamp updated_at
     }
 
     PIPELINE_STEPS {
@@ -347,15 +384,15 @@ erDiagram
       varchar type
       jsonb config
       int order
-      timestamptz created_at
-      timestamptz updated_at
+      timestamp created_at
+      timestamp updated_at
     }
 
     SUBSCRIBERS {
       uuid id PK
       uuid pipeline_id FK
       text url
-      timestamptz created_at
+      timestamp created_at
     }
 
     JOBS {
@@ -367,9 +404,9 @@ erDiagram
       enum status
       text filter_reason
       int attempt_count
-      timestamptz created_at
-      timestamptz updated_at
-      timestamptz processed_at
+      timestamp created_at
+      timestamp updated_at
+      timestamp processed_at
     }
 
     DELIVERIES {
@@ -378,7 +415,7 @@ erDiagram
       uuid subscriber_id FK
       enum status
       int attempt_count
-      timestamptz last_attempt_at
+      timestamp last_attempt_at
     }
 
     DELIVERY_ATTEMPTS {
@@ -387,7 +424,7 @@ erDiagram
       int attempt_number
       int status_code
       text error
-      timestamptz attempted_at
+      timestamp attempted_at
     }
 
     USERS ||--o{ PIPELINES : owns
