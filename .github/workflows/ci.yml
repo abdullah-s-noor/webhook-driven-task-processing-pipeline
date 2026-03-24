@@ -41,12 +41,9 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-      - run: npm run migrate
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/webhookpipe_test
       - run: npm test
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/webhookpipe_test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/webhookpipe_test
           JWT_SECRET: ci-secret
           NODE_ENV: test
           PORT: 3000
@@ -62,7 +59,7 @@ jobs:
             exit "$code"
           fi
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/webhookpipe_test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/webhookpipe_test
           JWT_SECRET: ci-secret
           NODE_ENV: test
           PORT: 3000
@@ -98,5 +95,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Prepare env files for compose
+        run: |
+          mkdir -p backend/src/db
+          printf '%s\n' \
+            'POSTGRES_DB=webhookpipe' \
+            'POSTGRES_USER=postgres' \
+            'POSTGRES_PASSWORD=postgres' \
+            > backend/src/db/.env
+
+          if [ ! -f backend/.env ]; then
+            printf '%s\n' \
+              'NODE_ENV=development' \
+              'PORT=3000' \
+              'DATABASE_URL=postgres://postgres:postgres@postgres:5432/webhookpipe' \
+              'JWT_SECRET=ci-secret' \
+              'WORKER_POLL_INTERVAL_MS=5000' \
+              'MAX_DELIVERY_ATTEMPTS=3' \
+              'DELIVERY_TIMEOUT_MS=10000' \
+              > backend/.env
+          fi
       - name: Validate docker compose
         run: docker compose config
