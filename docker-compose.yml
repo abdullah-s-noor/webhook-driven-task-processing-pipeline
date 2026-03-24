@@ -20,12 +20,22 @@ services:
       context: ./backend
     env_file:
       - ./backend/.env
-    command: sh -c "npm run migrate && npm run dev"
+    command: sh -c "npm run dev"
     depends_on:
       postgres:
         condition: service_healthy
     ports:
       - "3000:3000"
+
+  worker:
+    build:
+      context: ./backend
+    env_file:
+      - ./backend/.env
+    command: sh -c "npm run worker"
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   frontend:
     build:

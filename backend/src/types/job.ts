@@ -1,6 +1,10 @@
 import type { JsonValue } from "./pipeline.js";
 
-export type JobStatus = "pending" | "processing" | "processed" | "failed";
+export type JobStatus =
+  | "pending"
+  | "processing"
+  | "processed"
+  | "failed";
 
 export interface Job {
   id: string;

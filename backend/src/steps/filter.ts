@@ -20,6 +20,12 @@ interface FilterConfig {
   conditions: FilterCondition[];
 }
 
+interface LegacyFilterConfig {
+  field: string;
+  operator: string;
+  value: JsonValue;
+}
+
 function isFilterConfig(config: unknown): config is FilterConfig {
   const value = config as Record<string, unknown>;
 
@@ -29,6 +35,45 @@ function isFilterConfig(config: unknown): config is FilterConfig {
     !Array.isArray(config) &&
     Array.isArray(value.conditions)
   );
+}
+
+function isLegacyFilterConfig(config: unknown): config is LegacyFilterConfig {
+  const value = config as Record<string, unknown>;
+
+  return (
+    typeof config === "object" &&
+    config !== null &&
+    !Array.isArray(config) &&
+    typeof value.field === "string" &&
+    typeof value.operator === "string"
+  );
+}
+
+function normalizeOperator(operator: string): FilterOperator | null {
+  switch (operator) {
+    case "eq":
+    case "=":
+      return "eq";
+    case "neq":
+    case "!=":
+      return "neq";
+    case "gt":
+    case ">":
+      return "gt";
+    case "gte":
+    case ">=":
+      return "gte";
+    case "lt":
+    case "<":
+      return "lt";
+    case "lte":
+    case "<=":
+      return "lte";
+    case "contains":
+      return "contains";
+    default:
+      return null;
+  }
 }
 
 function formatValue(value: JsonValue | undefined): string {
@@ -60,11 +105,23 @@ export function filterStep(
   payload: PayloadObject,
   config: JsonValue
 ): StepExecutionResult {
-  if (!isFilterConfig(config)) {
-    throw new Error("filter config.conditions must be an array");
+  let conditions: FilterCondition[];
+
+  if (isFilterConfig(config)) {
+    conditions = config.conditions;
+  } else if (isLegacyFilterConfig(config)) {
+    const op = normalizeOperator(config.operator);
+
+    if (!op) {
+      throw new Error(`Unsupported filter operator: ${config.operator}`);
+    }
+
+    conditions = [{ field: config.field, op, value: config.value }];
+  } else {
+    throw new Error("filter config is invalid");
   }
 
-  for (const condition of config.conditions) {
+  for (const condition of conditions) {
     const actual = payload[condition.field];
     const passed = evaluateCondition(actual, condition);
 
