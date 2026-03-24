@@ -1,6 +1,6 @@
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { db } from "../client.js";
-import { jobs, pipelineSteps } from "../schema.js";
+import { jobs, pipelineSteps, pipelines } from "../schema.js";
 import type { Job, JobStatus } from "../../types/job.js";
 import type { JsonValue } from "../../types/pipeline.js";
 
@@ -89,4 +89,79 @@ export async function updateStatus(
     .returning();
 
   return record ? toJob(record) : null;
+}
+
+async function userOwnsPipeline(userId: string, pipelineId: string): Promise<boolean> {
+  const pipeline = await db.query.pipelines.findFirst({
+    where: and(
+      eq(pipelines.id, pipelineId),
+      eq(pipelines.userId, userId),
+      eq(pipelines.isActive, true)
+    ),
+  });
+
+  return Boolean(pipeline);
+}
+
+export async function createForUser(
+  userId: string,
+  input: CreateJobInput
+): Promise<Job | null> {
+  const ownsPipeline = await userOwnsPipeline(userId, input.pipelineId);
+
+  if (!ownsPipeline) {
+    return null;
+  }
+
+  return create(input);
+}
+
+export async function findByPipelineForUser(
+  userId: string,
+  pipelineId: string
+): Promise<Job[] | null> {
+  const ownsPipeline = await userOwnsPipeline(userId, pipelineId);
+
+  if (!ownsPipeline) {
+    return null;
+  }
+
+  const records = await db
+    .select({ job: jobs })
+    .from(jobs)
+    .innerJoin(pipelines, eq(pipelines.id, jobs.pipelineId))
+    .where(
+      and(
+        eq(jobs.pipelineId, pipelineId),
+        eq(pipelines.userId, userId),
+        eq(pipelines.isActive, true)
+      )
+    )
+    .orderBy(asc(jobs.createdAt));
+
+  return records.map((record) => toJob(record.job));
+}
+
+export async function findByIdForUser(
+  userId: string,
+  jobId: string
+): Promise<Job | null> {
+  const records = await db
+    .select({ job: jobs })
+    .from(jobs)
+    .innerJoin(pipelines, eq(pipelines.id, jobs.pipelineId))
+    .where(
+      and(
+        eq(jobs.id, jobId),
+        eq(pipelines.userId, userId),
+        eq(pipelines.isActive, true)
+      )
+    )
+    .limit(1);
+
+  if (!records.length) {
+    return null;
+  }
+
+  return toJob(records[0].job);
 }
