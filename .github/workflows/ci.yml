@@ -43,10 +43,10 @@ jobs:
       - run: npm run build
       - run: npm run migrate
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/webhookpipe_test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/webhookpipe_test
       - run: npm test
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/webhookpipe_test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/webhookpipe_test
           JWT_SECRET: ci-secret
           NODE_ENV: test
           PORT: 3000
@@ -62,7 +62,7 @@ jobs:
             exit "$code"
           fi
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/webhookpipe_test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/webhookpipe_test
           JWT_SECRET: ci-secret
           NODE_ENV: test
           PORT: 3000
