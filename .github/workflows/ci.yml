@@ -101,22 +101,22 @@ jobs:
       - name: Prepare env files for compose
         run: |
           mkdir -p backend/src/db
-          cat > backend/src/db/.env <<'EOF'
-          POSTGRES_DB=webhookpipe
-          POSTGRES_USER=postgres
-          POSTGRES_PASSWORD=postgres
-          EOF
+          printf '%s\n' \
+            'POSTGRES_DB=webhookpipe' \
+            'POSTGRES_USER=postgres' \
+            'POSTGRES_PASSWORD=postgres' \
+            > backend/src/db/.env
 
           if [ ! -f backend/.env ]; then
-            cat > backend/.env <<'EOF'
-            NODE_ENV=development
-            PORT=3000
-            DATABASE_URL=postgres://postgres:postgres@postgres:5432/webhookpipe
-            JWT_SECRET=ci-secret
-            WORKER_POLL_INTERVAL_MS=5000
-            MAX_DELIVERY_ATTEMPTS=3
-            DELIVERY_TIMEOUT_MS=10000
-            EOF
+            printf '%s\n' \
+              'NODE_ENV=development' \
+              'PORT=3000' \
+              'DATABASE_URL=postgres://postgres:postgres@postgres:5432/webhookpipe' \
+              'JWT_SECRET=ci-secret' \
+              'WORKER_POLL_INTERVAL_MS=5000' \
+              'MAX_DELIVERY_ATTEMPTS=3' \
+              'DELIVERY_TIMEOUT_MS=10000' \
+              > backend/.env
           fi
       - name: Validate docker compose
         run: docker compose config
