@@ -22,6 +22,7 @@ jobs:
         run: |
           printf "%s" "${{ secrets.DB_ENV }}" > ./backend/src/db/.env
           printf "%s" "${{ secrets.BACKEND_ENV }}" > ./backend/.env
+          printf "%s" "${{ secrets.FRONTEND_ENV }}" > ./frontend/.env
 
       - name: Deploy with Docker Compose
         run: |

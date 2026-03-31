@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3000";
+import API_BASE_URL from "./apiBaseUrl";
 
 export interface Subscriber {
   id: string;
@@ -73,3 +73,4 @@ export async function updateSubscriber(
   const data = await parseJson<{ subscriber: Subscriber }>(response);
   return data.subscriber;
 }
+

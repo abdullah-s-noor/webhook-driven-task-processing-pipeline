@@ -136,7 +136,7 @@ docker compose up --build
 
 Services:
 - Frontend: `http://localhost:5173`
-- Backend API: `http://localhost:3000`
+- Backend API: `http://51.20.5.15`
 - PostgreSQL: `localhost:5432`
 
 ---
@@ -186,7 +186,7 @@ npm ci
 npm run dev
 ```
 
-Frontend service clients currently target `http://localhost:3000`.
+Frontend service clients currently target `http://51.20.5.15`.
 
 ## Database and Migrations
 
@@ -246,21 +246,21 @@ All endpoints below (except `/auth/*` and `/test`) require:
 
 ### Register
 ```bash
-curl -X POST http://localhost:3000/auth/register \
+curl -X POST http://51.20.5.15/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"12345678"}'
 ```
 
 ### Login
 ```bash
-curl -X POST http://localhost:3000/auth/login \
+curl -X POST http://51.20.5.15/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"12345678"}'
 ```
 
 ### Create Pipeline
 ```bash
-curl -X POST http://localhost:3000/pipelines \
+curl -X POST http://51.20.5.15/pipelines \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <TOKEN>" \
   -d '{"name":"Order Validator"}'
@@ -268,7 +268,7 @@ curl -X POST http://localhost:3000/pipelines \
 
 ### Add Step
 ```bash
-curl -X POST http://localhost:3000/pipeline-steps \
+curl -X POST http://51.20.5.15/pipeline-steps \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <TOKEN>" \
   -d '{
@@ -281,7 +281,7 @@ curl -X POST http://localhost:3000/pipeline-steps \
 
 ### Add Subscriber
 ```bash
-curl -X POST http://localhost:3000/subscribers \
+curl -X POST http://51.20.5.15/subscribers \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <TOKEN>" \
   -d '{"pipelineId":"<PIPELINE_ID>","url":"https://example.com/webhook"}'
@@ -289,7 +289,7 @@ curl -X POST http://localhost:3000/subscribers \
 
 ### Create Job
 ```bash
-curl -X POST http://localhost:3000/jobs \
+curl -X POST http://51.20.5.15/jobs \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <TOKEN>" \
   -d '{
@@ -435,3 +435,4 @@ erDiagram
     SUBSCRIBERS ||--o{ DELIVERIES : target
     DELIVERIES ||--o{ DELIVERY_ATTEMPTS : logs
 ```
+

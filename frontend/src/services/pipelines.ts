@@ -1,4 +1,4 @@
-﻿const API_BASE_URL = "http://localhost:3000";
+import API_BASE_URL from "./apiBaseUrl";
 
 export interface Pipeline {
   id: string;
@@ -56,3 +56,4 @@ export async function deletePipeline(token: string, id: string): Promise<Pipelin
   const data = await parseJson<{ pipeline: Pipeline }>(response);
   return data.pipeline;
 }
+

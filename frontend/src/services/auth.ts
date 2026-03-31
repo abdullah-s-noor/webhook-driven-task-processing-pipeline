@@ -1,6 +1,5 @@
 import type { AuthResponse } from "../types/api";
-
-const API_BASE_URL = "http://localhost:3000";
+import API_BASE_URL from "./apiBaseUrl";
 
 async function parseJson<T>(response: Response): Promise<T> {
   const data = (await response.json()) as T & { error?: string; message?: string };

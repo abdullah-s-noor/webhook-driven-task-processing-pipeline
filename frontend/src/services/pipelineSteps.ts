@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3000";
+import API_BASE_URL from "./apiBaseUrl";
 
 export type StepType =
   | "require_fields"
@@ -95,3 +95,4 @@ export async function updatePipelineStep(
   const data = await parseJson<{ step: PipelineStep }>(response);
   return data.step;
 }
+
