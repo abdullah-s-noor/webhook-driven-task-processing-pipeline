@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy with Docker Compose
         run: |
-          docker compose -f docker-compose.yml up -d --build --remove-orphans
+          docker compose up -d --build --remove-orphans
 
       - name: Show running services
         run: docker compose ps
